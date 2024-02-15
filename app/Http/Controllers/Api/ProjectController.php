@@ -11,7 +11,9 @@ class ProjectController extends Controller
     public function index()
     {
         // solo progetti senza type e technologies associate
-        $projects = Project::all();
+        // $projects = Project::all();
+        // progetti con tipo  e tecnologie
+        $projects = Project::with('type', 'technologies')->get();
         return response()->json([
             'success' => 'Top',
             'data' => $projects
