@@ -17,10 +17,19 @@ class ProjectController extends Controller
         // $projects = Project::with('type', 'technologies')->get();
 
         // progetti con paginazione
-        $projects = Project::with('type', 'technologies')->paginate(3);
+        $projects = Project::paginate(3);
         return response()->json([
-            'success' => 'Top',
+            'status' => 'true',
             'data' => $projects
+        ]);
+    }
+
+    public function show(string $slug)
+    {
+        $project = Project::where('slug', $slug)->with('type', 'technologies')->first();
+        return response()->json([
+            'status' => 'true',
+            'data' => $project
         ]);
     }
 }
