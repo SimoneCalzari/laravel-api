@@ -16,12 +16,25 @@ class ProjectController extends Controller
         // progetti con tipo  e tecnologie
         // $projects = Project::with('type', 'technologies')->get();
 
-        // progetti con paginazione
-        $projects = Project::paginate(3);
-        return response()->json([
-            'status' => 'true',
-            'data' => $projects
+
+        // validazione key per ricerca progetti
+        request()->validate([
+            'key' => 'nullable|string|min:3'
         ]);
+        if (request()->key) {
+            $projects = Project::where('title', 'LIKE', '%' . request()->key . '%')->orWhere('description', 'LIKE', '%' . request()->key . '%')->paginate(3);
+            return response()->json([
+                'status' => 'true',
+                'data' => $projects
+            ]);
+        } else {
+            // progetti con paginazione
+            $projects = Project::paginate(3);
+            return response()->json([
+                'status' => 'true',
+                'data' => $projects
+            ]);
+        }
     }
 
     public function show(string $slug)
