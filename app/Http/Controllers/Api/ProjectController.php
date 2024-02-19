@@ -21,20 +21,25 @@ class ProjectController extends Controller
         request()->validate([
             'key' => 'nullable|string|min:3'
         ]);
+
         if (request()->key) {
+            // progetti con ricerca
             $projects = Project::where('title', 'LIKE', '%' . request()->key . '%')->orWhere('description', 'LIKE', '%' . request()->key . '%')->paginate(3);
-            return response()->json([
-                'status' => 'true',
-                'data' => $projects
-            ]);
         } else {
             // progetti con paginazione
             $projects = Project::paginate(3);
-            return response()->json([
-                'status' => 'true',
-                'data' => $projects
-            ]);
         }
+
+        if ($projects->count()) {
+            $status = true;
+        } else {
+            $status = false;
+        }
+
+        return response()->json([
+            'status' => $status,
+            'data' => $projects
+        ]);
     }
 
     public function show(string $slug)
