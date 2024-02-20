@@ -71,7 +71,19 @@
                         : '<i class="fa-solid fa-user fs-5"></i>' !!}</p>
                 @endif
                 <!-- /DIFFICOLTA E TEAM/SINGLE DEL PROGETTO SFRUTTANDO RELAZIONI TRA TABELLE -->
-
+                <!-- COMMENTI -->
+                <h4 class="mb-2">Comments</h4>
+                @if ($project->comments->count())
+                    @foreach ($project->comments as $comment)
+                        <div class="border border-3 border-primary rounded px-3 pt-3 mb-3">
+                            <h6>{{ $comment->author }}</h6>
+                            <p>{{ $comment->content }}</p>
+                        </div>
+                    @endforeach
+                @else
+                    <p class="mb-3">No comments yet...</p>
+                @endif
+                <!-- /COMMENTI -->
                 <!-- EDIT-->
                 <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-primary">Edit <i
                         class="fa-solid fa-pen-to-square ms-1"></i></a>

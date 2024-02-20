@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('author', 50)->nullable();
             $table->text('content');
-            $table->foreignId('project_id')->constrained();
+            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

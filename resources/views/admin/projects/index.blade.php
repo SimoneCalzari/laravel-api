@@ -27,8 +27,9 @@
                 <tr>
                     <th>Id</th>
                     <th>Title</th>
-                    <th>Stack</th>
+                    {{-- <th>Stack</th> --}}
                     <th>Slug</th>
+                    <th>Comments</th>
                     <th></th>
                 </tr>
             </thead>
@@ -39,8 +40,9 @@
                     <tr class="align-middle">
                         <td>{{ $project->id }}</th>
                         <td>{{ $project->title }}</td>
-                        <td>{{ $project->technologies_stack }}</td>
+                        {{-- <td>{{ $project->technologies_stack }}</td> --}}
                         <td>{{ $project->slug }}</td>
+                        <td>{{ $project->comments->count() }}</td>
                         <td style="width: 30%">
                             <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-secondary btn-sm">Details
                                 <i class="fa-solid fa-circle-info ms-1"></i></a>
