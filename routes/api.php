@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +32,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // controller che risponde alla chiamata
 Route::get('/projects', [ProjectController::class, 'index']);
 Route::get('/projects/{slug}', [ProjectController::class, 'show']);
+
+// rotta per creazione commenti da front end
+Route::post('/comments', [CommentController::class, 'store']);
