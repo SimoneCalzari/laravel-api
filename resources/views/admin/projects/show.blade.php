@@ -76,7 +76,14 @@
                 @if ($project->comments->count())
                     @foreach ($project->comments as $comment)
                         <div class="border border-3 border-primary rounded px-3 pt-3 mb-3">
-                            <h6>{{ $comment->author }}</h6>
+                            <div class="d-flex justify-content-between">
+                                <h6>{{ $comment->author }}</h6>
+                                <form action="{{ route('admin.comments.destroy', $comment) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
                             <p>{{ $comment->content }}</p>
                         </div>
                     @endforeach
